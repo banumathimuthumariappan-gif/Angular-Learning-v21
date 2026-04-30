@@ -1,0 +1,18 @@
+import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { Counter } from "./components/counter/counter";
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet, Counter],
+  templateUrl: './app.html',
+  styleUrl: './app.css'
+})
+export class App {
+  protected readonly title = signal('02-Components-Counter_2_components');
+  countValue: number = 0;
+
+  countChanged(newCount: number) {
+    this.countValue = newCount;
+  }
+}

@@ -1,0 +1,8 @@
+<div class="container text-center">
+  <div class="card">
+    <h2>Counter App</h2>
+    <h1 class="text-secondary">{{ countValue }}</h1>
+
+    <app-counter [count]="countValue" (countChange)="countChanged($event)"></app-counter>
+  </div>
+</div>
