@@ -1,0 +1,8 @@
+@if(tasks.length > 0) {
+  <div class="container-fluid">
+    <app-task-manager [tasks]="tasks" (deleteTask)="onDeleteTask($event)"></app-task-manager>
+  </div>
+}
+@else {
+  <div class="text-center">No Tasks Found</div>
+}

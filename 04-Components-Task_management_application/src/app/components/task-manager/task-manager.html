@@ -1,0 +1,20 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Completed</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (task of tasks; track task.id) {
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.name }}</td>
+                <td>{{ task.completed }}</td>
+                <td><button class="btn btn-danger" (click)="onDeleteTask(task.id)">Delete Task</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
