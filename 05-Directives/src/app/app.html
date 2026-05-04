@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <h2>Built in Directives</h2>
+  <h4>If Syntax</h4>
+  @if(isLoggedIn) {
+    <p>Welcome User</p>
+  }
+  @else {
+    <p>No user logged in</p>
+  }
+
+  <h4>For syntax</h4>
+  @for (role of roles; track role) {
+    <p>{{ role }}</p>
+  }
+
+  <h4>Switch syntax</h4>
+  @switch (role) {
+    @case ('Admin') {
+      <p>Admin Dashboard</p>
+    }
+    @case ('User') {
+      <p>User Dashboard</p>
+    }
+    @default {
+      <p>Guest Dashboard</p>
+    }
+  }
+
+  <h4>ngStyle and ngClass</h4>
+  <p [ngStyle]="{ color : textColor, 'font-size.rem': fontSize}" [ngClass]="{'fw-bold': isBold, 'text-decoration-underline': isUnderlined}">This text changes color and size dynamically</p>
+
+  <div class="d-flex gap-3">
+    <button class="btn btn-success" (click)="changeTextColor('Blue')">Blue</button>
+    <button class="btn btn-success" (click)="changeTextColor('Orange')">Orange</button>
+    <button class="btn btn-success" (click)="changeTextColor('Black')">Black</button>
+
+    <button class="btn btn-primary" (click)="changeBoldStyle()">Toggle Bold</button>
+    <button class="btn btn-primary" (click)="changeUbderlineStyle()">Toggle Underline</button>
+  </div>
+
+  <h4 class="mt-4">Custom Directive</h4>
+  <p appHighlight="Yellow">Hover me for highlight</p>
+  <p appHighlight="green">Hover me for green</p>
+</div>
