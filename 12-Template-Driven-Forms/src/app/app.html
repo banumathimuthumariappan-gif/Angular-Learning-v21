@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="card mt-5">
+    <div class="card-body">
+      <form #userForm="ngForm" (ngSubmit)="submitForm(userForm)">
+        <div class="row mb-4">
+          <div class="col-3">
+            <label for="fullName" class="form-label">Full Name</label>
+          </div>
+          <div class="col-9">
+            <input type="text" name="fullName" id="fullName" class="form-control" #fullName="ngModel" [(ngModel)]="user.fullName" placeholder="Enter Full Name">
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-3">
+            <label for="email" class="control-label">Email</label>
+          </div>
+          <div class="col-9">
+            <input type="email" name="email" id="email" class="form-control" #email="ngModel"  [(ngModel)]="user.email" placeholder="Enter Email">
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-3">
+            <label for="password" class="control-label">Password</label>
+          </div>
+          <div class="col-9">
+            <input type="password" name="password" id="password" class="form-control" #password="ngModel" [(ngModel)]="user.password" placeholder="Enter Password">
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-3">
+            <label for="gender">Gender</label>
+          </div>
+          <div class="col-9">
+            <div class="form-check form-check-inline">
+              <input type="radio" name="gender" id="gender" class="form-check-input" [(ngModel)]="user.gender" value="Male">
+              <label class="form-check-label">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" name="gender" id="gender" class="form-check-input" [(ngModel)]="user.gender" value="Female">
+              <label class="form-check-label">Female</label>
+            </div>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+          <div class="col-4">
+            <button class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+      <pre></pre>
+    </div>
+  </div>
+</div>
