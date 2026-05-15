@@ -1,0 +1,6 @@
+<h4 class="text-primary">Students List Page</h4>
+<ul class="list-group">
+    @for(student of students; track student.id) {
+        <li><a [routerLink]="['/students', student.id]" [queryParams]="{ name: student.name, course: student.course }">{{ student.name }}</a></li>
+    }
+</ul>
