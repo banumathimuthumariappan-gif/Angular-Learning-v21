@@ -2,43 +2,185 @@
   <div class="card mt-5">
     <div class="card-body">
       <form #userForm="ngForm" (ngSubmit)="submitForm(userForm)">
+        <!-- Full Name -->
         <div class="row mb-4">
           <div class="col-3">
             <label for="fullName" class="form-label">Full Name</label>
           </div>
           <div class="col-9">
-            <input type="text" name="fullName" id="fullName" class="form-control" #fullName="ngModel" [(ngModel)]="user.fullName" placeholder="Enter Full Name">
+            <input type="text" name="fullName" id="fullName" class="form-control" #fullName="ngModel" [(ngModel)]="user.fullName" placeholder="Enter Full Name" required minlength="3" [class.is-invalid]="fullName.touched && fullName.invalid" [class.is-valid]="fullName.touched && fullName.valid">
           </div>
-        </div>
+          <div class="col-3"></div>
+          <div class="col-9">
+              @if (fullName.touched && fullName.invalid) {
+                <div class="invalid-feedback d-block">
+                  @if (fullName.errors?.['required']) {
+                    <span>Fullname is required</span>
+                  }
+                  @if (fullName.errors?.['minlength']) {
+                    <span>Username should be minimum 3 characters</span>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        <!-- Email -->
         <div class="row mb-4">
           <div class="col-3">
             <label for="email" class="control-label">Email</label>
           </div>
           <div class="col-9">
-            <input type="email" name="email" id="email" class="form-control" #email="ngModel"  [(ngModel)]="user.email" placeholder="Enter Email">
+            <input type="email" name="email" id="email" class="form-control" #email="ngModel"  [(ngModel)]="user.email" placeholder="Enter Email" required email [class.is-invalid]="email.touched && email.invalid" [class.is-valid]="email.touched && email.valid">
+          </div>
+          <div class="col-3"></div>
+          <div class="col-9">
+            @if (email.touched && email.invalid) {
+              <div class="invalid-feedback d-block">
+                @if (email.errors?.['required']) {
+                  <span>Email is required</span>
+                }
+                @if (email.errors?.['email']) {
+                  <span>Please enter correct email</span>
+                }
+              </div>
+            }
           </div>
         </div>
+        <!-- Password -->
         <div class="row mb-4">
           <div class="col-3">
             <label for="password" class="control-label">Password</label>
           </div>
           <div class="col-9">
-            <input type="password" name="password" id="password" class="form-control" #password="ngModel" [(ngModel)]="user.password" placeholder="Enter Password">
+            <input type="password" name="password" id="password" class="form-control" #password="ngModel" [(ngModel)]="user.password" placeholder="Enter Password" required minlength="3" [class.is-invalid]="password.touched && password.invalid" [class.is-valid]="password.touched && password.valid">
+          </div>
+          <div class="col-3"></div>
+          <div class="col-9">
+            @if (password.touched && password.invalid) {
+              <div class="invalid-feedback d-block">
+                @if (password.errors?.['required']) {
+                  <span>Password is required</span>
+                }
+                @if (password.errors?.['minlength']) {
+                  <span>Password should be minimum 3 characters</span>
+                }
+              </div>
+            }
           </div>
         </div>
+        <!-- Gender -->
         <div class="row mb-4">
           <div class="col-3">
             <label for="gender">Gender</label>
           </div>
           <div class="col-9">
             <div class="form-check form-check-inline">
-              <input type="radio" name="gender" id="gender" class="form-check-input" [(ngModel)]="user.gender" value="Male">
+              <input type="radio" name="gender" id="male" class="form-check-input" [(ngModel)]="user.gender" value="Male" #gender="ngModel" required>
               <label class="form-check-label">Male</label>
             </div>
             <div class="form-check form-check-inline">
-              <input type="radio" name="gender" id="gender" class="form-check-input" [(ngModel)]="user.gender" value="Female">
+              <input type="radio" name="gender" id="female" class="form-check-input" [(ngModel)]="user.gender" value="Female" required>
               <label class="form-check-label">Female</label>
             </div>
+          </div>
+          <div class="col-3"></div>
+          <div class="col-9">
+            @if (userForm.submitted && gender.invalid) {
+              <div class="invalid-feedback d-block">
+                <span>Please select Gender</span>
+              </div>
+            }
+          </div>
+        </div>
+        <!-- City -->
+        <div class="row mb-4">
+          <div class="col-3">
+            <label for="city" class="form-label">City</label>
+          </div>
+          <div class="col-9">
+            <select name="city" id="city" class="form-select" [(ngModel)]="user.city" #city="ngModel" required [class.is-invalid]="city.touched && city.invalid" [class.is-valid]="city.touched && city.valid">
+              <option value="">Select City</option>
+              <option value="chennai">Chennai</option>
+              <option value="bangalore">Bangalore</option>
+              <option value="coimbatore">Coimbatore</option>
+              <option value="hyderabad">Hyderabad</option>
+            </select>
+          </div>
+          <div class="col-3"></div>
+          <div class="col-9">
+            @if (city.touched && city.invalid) {
+              <div class="invalid-feedback d-block">
+                @if (city.errors?.['required']) {
+                  <span>City is required</span>
+                }
+              </div>
+            }
+          </div>
+        </div>
+        <!-- Skills -->
+        <div class="row mb-4">
+          <div class="col-3">
+            <label for="skills" class="form-label">Skills</label>
+          </div>
+          <div class="col-9">
+            <div class="form-check">
+              <input type="checkbox" name="skills" id="angular" class="form-check-input" value="Angular" [(ngModel)]="selectedSkills['Angular']">
+              <label for="angular" class="form-check-label">Angular</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" name="skills" id="react" class="form-check-input" value="React" [(ngModel)]="selectedSkills['React']">
+              <label for="react" class="form-check-label">React</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" name="skills" id="vue" class="form-check-input" value="Vue" [(ngModel)]="selectedSkills['Vue']">
+              <label for="vue" class="form-check-label">Vue</label>
+            </div>
+          </div>
+          <div class="col-3"></div>
+          <div class="col-9">
+            @if (userForm.submitted && getSelectedSkills().length === 0) {
+              <div class="invalid-feedback d-block">
+                <span>Please select atleast one skill</span>
+              </div>
+            }
+          </div>
+        </div>
+        <!-- About -->
+        <div class="row mb-4">
+          <div class="col-3">
+            <label for="about">About</label>
+          </div>
+          <div class="col-9">
+            <textarea name="about" id="about" class="form-control" [(ngModel)]="user.about" required maxlength="300" #about="ngModel" [class.is-invalid]="about.touched && about.invalid" [class.is-valid]="about.touched && about.valid"></textarea>
+          </div>
+          <div class="col-3"></div>
+          <div class="col-9">
+            @if (about.touched && about.invalid) {
+              <div class="invalid-feedback d-block">
+                @if (about.errors?.['required']) {
+                  <span>About is required</span>
+                }
+                @if (about.errors?.['maxlength']) {
+                  <span>Maximum length is 300 characters</span>
+                }
+              </div>
+            }
+          </div>
+        </div>
+        <!-- Terms and conditions -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="form-check">
+              <input type="checkbox" name="acceptTerms" id="acceptTerms" class="form-check-input" [(ngModel)]="user.acceptTerms" #acceptTerms="ngModel" required>
+              <label for="acceptTerms" class="form-check-label">Please accept the Terms and Conditions</label>
+            </div>
+          </div>
+          <div class="col-12">
+            @if (userForm.submitted && acceptTerms.invalid) {
+              <div class="invalid-feedback d-block">
+                <span>Please accept the terms and conditions</span>
+              </div>
+            }
           </div>
         </div>
         <div class="row d-flex justify-content-center">
@@ -47,7 +189,7 @@
           </div>
         </div>
       </form>
-      <pre></pre>
+      <pre>{{ user | json }}</pre>
     </div>
   </div>
 </div>
